@@ -32,7 +32,7 @@ public class Main {
 				}
 				break;
 			case 3:
-				
+				modificarProducto(productos,scanner);
 				break;
 			case 4:
 				salir = true;
@@ -50,6 +50,54 @@ public class Main {
 		
 	}
 	
+	private static void modificarProducto(ArrayList<Producto> productos, Scanner scanner) {
+		int indice = 0;
+		boolean productoEncotrado = false;
+		int codigo = verificarEntradaDeDatoInt(scanner, "Ingrese codigo de producto que desea modificar");
+		for (Producto producto : productos) {
+			if (producto.getCodigo() == codigo) {
+				productoEncotrado = true;
+				break;
+			}
+			indice++;
+		}
+		if (productoEncotrado) {
+			boolean opcionSalir = false;
+			System.out.println("----- Producto encontrado -----");
+			do {
+				mostrarMenuModificacion();
+				int opcion = verificarEntradaDeDatoInt(scanner, "Ingrese opcion a modificar");
+				switch (opcion) {
+				case 1:
+					System.out.println("Ingrese nueva descripcion del producto: ");
+					productos.get(indice).setDescripcion(scanner.next());
+					break;
+				case 2:
+					productos.get(indice).setPrecioUnitario(
+							verificarEntradaDeDatoDouble(scanner, "Ingrese nuevo precio unitario del producto: "));
+					break;
+				case 3:
+					System.out.println("Ingrese nuevo origen de fabricacion del producto: ");
+					productos.get(indice).setOrigenFabricacion(cargarPais(scanner));
+					break;
+				case 4:
+					System.out.println("Ingrese nueva categoria del producto: ");
+					productos.get(indice).setCategoria(cargarCategoria(scanner));
+					break;
+				case 5:
+					System.out.println("----- Saliendo de opciones de modificacion -----");
+					opcionSalir = true;
+					break;
+				default:
+					System.out.println("Ingreso una opcion de modificacion invvalida.");
+					break;
+				}
+			} while (!opcionSalir);
+		}else {
+			System.out.println("Producto no encontrado. No se realizaron modificaciones");
+		}
+	}
+
 	private static void cargarProducto(ArrayList<Producto> productos, Scanner scanner) {
 		Producto nuevoProducto = new Producto();
 		nuevoProducto.setCodigo(verificarEntradaDeDatoInt(scanner, "Ingrese codigo de producto: "));
@@ -102,6 +150,15 @@ public class Main {
 			} 
 		} while (paisFueraDeRango);
 		return paisNuevo;
+	}
+	
+	public static void mostrarMenuModificacion() {
+		System.out.println( "Menu: " + "\n" +
+							"1 – Modificar descripcion." + "\n" +
+							"2 – Modificar precio unitario." + "\n" +
+							"3 – Modificar origen de fabricacion." + "\n" +
+							"4 – Modificar categoria." + "\n" +
+							"5 – Salir.");
 	}
 
 	public static void mostrarMenu() {
