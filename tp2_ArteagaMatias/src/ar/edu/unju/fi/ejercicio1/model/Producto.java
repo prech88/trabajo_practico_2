@@ -60,7 +60,7 @@ public class Producto {
 	}
 
 	public enum Paises {
-		ARGENTINA, CHINA, BRASIL, URUGUAY
+		ARGENTINA, CHINA, BRASIL, URUGUAY;
 	}
 	
 	public enum Categorias {
