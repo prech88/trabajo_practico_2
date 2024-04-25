@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import ar.edu.unju.fi.ejercicio1.model.Producto;
+import ar.edu.unju.fi.ejercicio1.model.Producto.Categorias;
+import ar.edu.unju.fi.ejercicio1.model.Producto.Paises;
 
 public class Main {
 
@@ -21,7 +23,9 @@ public class Main {
 				cargarProducto(productos,scanner);
 				break;
 			case 2:
-				
+				for (Producto producto : productos) {
+					System.out.println(producto);
+				}
 				break;
 			case 3:
 				
@@ -48,6 +52,52 @@ public class Main {
 		System.out.println("Ingrese descripcion del producto: ");
 		nuevoProducto.setDescripcion(scanner.next());
 		nuevoProducto.setPrecioUnitario(verificarEntradaDeDatoDouble(scanner, "Ingrese precio unitario del producto: "));
+		nuevoProducto.setOrigenFabricacion(cargarPais(scanner));
+		nuevoProducto.setCategoria(cargarCategoria(scanner));
+		productos.add(nuevoProducto);
+		System.out.println("------ Producto nuevo cargado exitosamente ------");
+	}
+
+	private static Categorias cargarCategoria(Scanner scanner) {
+		boolean categoriaFueraDeRango = true;
+		Categorias categoriaNuevo = null;
+		do {
+			int indice = 0;
+			System.out.println("------ Categoría ------");
+			for (Categorias categoria : Categorias.values()) {
+				indice++;
+				System.out.println(indice + " - " + categoria);
+			}
+			int opcion = verificarEntradaDeDatoInt(scanner, "Elija opcion de categoria de producto: ");
+			if (opcion > 0 && opcion <= Categorias.values().length) {
+				categoriaNuevo = Categorias.values()[opcion-1];
+				categoriaFueraDeRango = false;
+			} else {
+				System.out.println("No selecciono una opcion de categoria valida. Vuelva a intentarlo.");
+			} 
+		} while (categoriaFueraDeRango);
+		return categoriaNuevo;
+	}
+
+	private static Paises cargarPais(Scanner scanner) {
+		boolean paisFueraDeRango = true;
+		Paises paisNuevo = null;
+		do {
+			int indice = 0;
+			System.out.println("---- Origen de fabricación ------");
+			for (Paises pais : Paises.values()) {
+				indice++;
+				System.out.println(indice + " - " + pais);
+			}
+			int opcion = verificarEntradaDeDatoInt(scanner, "Elija opcion de pais de producto: ");
+			if (opcion > 0 && opcion <= Paises.values().length) {
+				paisNuevo = Paises.values()[opcion-1];
+				paisFueraDeRango = false;
+			} else {
+				System.out.println("No selecciono una opcion de pais valida. Vuelva a intentarlo.");
+			} 
+		} while (paisFueraDeRango);
+		return paisNuevo;
 	}
 
 	public static void mostrarMenu() {

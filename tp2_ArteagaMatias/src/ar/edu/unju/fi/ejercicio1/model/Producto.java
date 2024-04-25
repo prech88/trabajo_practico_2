@@ -19,6 +19,12 @@ public class Producto {
 		this.categoria = categoria;
 	}
 	
+	@Override
+	public String toString() {
+		return "Producto [codigo=" + codigo + ", descripcion=" + descripcion + ", precioUnitario=" + precioUnitario
+				+ ", origenFabricacion=" + origenFabricacion.name() + ", categoria=" + categoria.name() + "]";
+	}
+
 	public Integer getCodigo() {
 		return codigo;
 	}
