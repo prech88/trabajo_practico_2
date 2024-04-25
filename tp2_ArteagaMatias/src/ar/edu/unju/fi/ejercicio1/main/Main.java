@@ -23,8 +23,12 @@ public class Main {
 				cargarProducto(productos,scanner);
 				break;
 			case 2:
-				for (Producto producto : productos) {
-					System.out.println(producto);
+				if (!productos.isEmpty()) {
+					for (Producto producto : productos) {
+						System.out.println(producto);
+					}
+				}else {
+					System.out.println("La lista de productos esta vacia.");
 				}
 				break;
 			case 3:
