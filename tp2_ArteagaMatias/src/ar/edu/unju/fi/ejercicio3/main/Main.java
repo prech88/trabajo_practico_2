@@ -8,6 +8,7 @@ public class Main {
 		Provincia[] provincias = Provincia.values();
 		
 		for (Provincia provincia : provincias) {
+			System.out.println("----------------------------------------");
             System.out.println("Provincia: " + provincia);
             System.out.println("Cantidad de población: " + provincia.getCANTIDAD_POBLACION());
             System.out.println("Superficie: " + provincia.getSUPERFICIE());
