@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import ar.edu.unju.fi.ejercicio4.constantes.Posicion;
 import ar.edu.unju.fi.ejercicio4.model.Jugador;
 
 public class Main {
@@ -33,7 +34,7 @@ public class Main {
 				}
 				break;
 			case 3:
-				modificarDatosJugador(jugadores, scanner);
+				modificarPosicionJugador(jugadores, scanner);
 				break;
 			case 4:
 				eliminarJugador(jugadores, scanner);
@@ -78,25 +79,30 @@ public class Main {
 		}
 	}
 
-	private static void modificarDatosJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
-		System.out.println("Para modificar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
-		String nombre = scanner.next();
-		System.out.println("Ingrese apellido: ");
-		String apellido = scanner.next();
-		boolean noEncontrado = true;
-		int indice = 0;
-		for (Jugador jugador : jugadores) {
-			if (nombre.equals(jugador.getNombre())&&apellido.equals(jugador.getApellido())) {
-				System.out.println("Jugador encontrado. Ingrese los nuevos datos:");
-				jugadores.set(indice, cargarJugador(scanner));
-				System.out.println("Jugador modificado exitosamente.");
-				noEncontrado = false;
-				break;
+	private static void modificarPosicionJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
+		if (!jugadores.isEmpty()) {
+			System.out
+					.println("Para modificar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
+			String nombre = scanner.next();
+			System.out.println("Ingrese apellido: ");
+			String apellido = scanner.next();
+			boolean noEncontrado = true;
+			int indice = 0;
+			for (Jugador jugador : jugadores) {
+				if (nombre.equals(jugador.getNombre()) && apellido.equals(jugador.getApellido())) {
+					System.out.println("Jugador encontrado. Ingrese los nuevos datos:");
+					jugadores.set(indice, cargarJugador(scanner));
+					System.out.println("Jugador modificado exitosamente.");
+					noEncontrado = false;
+					break;
+				}
+				indice++;
 			}
-			indice++;
-		}
-		if (noEncontrado) {
-			System.out.println("No se encontro jugador");
+			if (noEncontrado) {
+				System.out.println("No se encontro jugador");
+			} 
+		}else {
+			System.out.println("La lista de jugadores esta vacia.");
 		}
 	}
 
@@ -111,7 +117,29 @@ public class Main {
 		jugadorNuevo.setNacionalidad(scanner.next());		
 		jugadorNuevo.setEstatura(verificarEntradaDeDatoFloat(scanner, "Ingrese estatura de jugador: "));
 		jugadorNuevo.setPeso(verificarEntradaDeDatoInt(scanner, "Ingrese peso de jugador: "));
+		jugadorNuevo.setPosicion(cargarPocicion(scanner));
 		return jugadorNuevo;
+	}
+
+	private static Posicion cargarPocicion(Scanner scanner) {
+		boolean posicionFueraDeRango = true;
+		Posicion nuevaPosicion = null;
+		do {
+			int indice = 0;
+			System.out.println("------ Categoría ------");
+			for (Posicion posicion : Posicion.values()) {
+				indice++;
+				System.out.println(indice + " - " + posicion);
+			}
+			int opcion = verificarEntradaDeDatoInt(scanner, "Seleccione numero de posicion: ");
+			if (opcion > 0 && opcion <= Posicion.values().length) {
+				nuevaPosicion = Posicion.values()[opcion-1];
+				posicionFueraDeRango = false;
+			} else {
+				System.out.println("No selecciono una opcion de pocicion valida. Vuelva a intentarlo.");
+			} 
+		} while (posicionFueraDeRango);
+		return nuevaPosicion;
 	}
 
 	public static void mostrarMenu() {
