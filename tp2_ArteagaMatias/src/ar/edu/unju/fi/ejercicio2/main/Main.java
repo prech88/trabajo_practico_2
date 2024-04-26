@@ -58,8 +58,27 @@ public class Main {
 	}
 
 	private static void eliminarEfemeride(ArrayList<Efemeride> efemerides, Scanner scanner) {
-		// TODO Auto-generated method stub
-		
+		if (!efemerides.isEmpty()) {
+			Integer codigo = verificarEntradaDeDatoInt(scanner,
+					"Inserte codigo de efemeride paara buscar y eliminar: ");
+			boolean encontrado = false;
+			int indice = 0;
+			for (Efemeride efemeride : efemerides) {
+				if (efemeride.getCodigo() == codigo) {
+					encontrado = true;
+					break;
+				}
+				indice++;
+			}
+			if (encontrado) {
+				efemerides.remove(indice);
+				System.out.println("Se elimino Efemeride con exito.");
+			} else {
+				System.out.println("No se encontro la Efemeride para eliminar.");
+			} 
+		}else {
+			System.out.println("La lista de Efemeride esta vacia.");
+		}
 	}
 
 	private static void cargarEfemeride(ArrayList<Efemeride> efemerides, Scanner scanner) {
