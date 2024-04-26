@@ -142,7 +142,7 @@ public class Main {
 	}
 
 	public static void mostrarMenu() {
-		System.out.println( "Menu: " + "\n" +
+		System.out.println( "----- Menu ----- " + "\n" +
 							"1 – Alta de jugador." + "\n" +
 							"2 – Mostrar todos los jugadores." + "\n" +
 							"3 – Modificar posicion de un jugador." + "\n" +
