@@ -19,7 +19,7 @@ public class Main {
 			opcion = verificarEntradaDeDatoInt( scanner, "Ingrese numero de opcion: ");
 			switch (opcion) {
 			case 1:
-				cargarEfemeride(efemerides,scanner);
+				cargarEfemeride(efemerides,scanner,-1);
 				break;
 			case 2:
 				if (!efemerides.isEmpty()) {
@@ -53,8 +53,28 @@ public class Main {
 	}
 	
 	private static void modificarEfemeride(ArrayList<Efemeride> efemerides, Scanner scanner) {
-		// TODO Auto-generated method stub
-		
+		if (!efemerides.isEmpty()) {
+			Integer codigo = verificarEntradaDeDatoInt(scanner,
+					"Inserte codigo de efemeride para buscar y modificar: ");
+			boolean encontrado = false;
+			int indice = 0;
+			for (Efemeride efemeride : efemerides) {
+				if (efemeride.getCodigo() == codigo) {
+					encontrado = true;
+					break;
+				}
+				indice++;
+			}
+			if (encontrado) {
+				System.out.println("Efemeride encontrada. Ingrese nuevos datos: ");
+				cargarEfemeride(efemerides, scanner,indice);
+				System.out.println("Se modifico Efemeride con exito.");
+			} else {
+				System.out.println("No se encontro la Efemeride para modificar.");
+			} 
+		}else {
+			System.out.println("La lista de Efemeride esta vacia.");
+		}
 	}
 
 	private static void eliminarEfemeride(ArrayList<Efemeride> efemerides, Scanner scanner) {
@@ -81,14 +101,18 @@ public class Main {
 		}
 	}
 
-	private static void cargarEfemeride(ArrayList<Efemeride> efemerides, Scanner scanner) {
+	private static void cargarEfemeride(ArrayList<Efemeride> efemerides, Scanner scanner, int i) {
 		Efemeride nuevafemeride = new Efemeride();
 		nuevafemeride.setCodigo(verificarEntradaDeDatoInt(scanner, "Ingrese codigo de Efemeride"));
 		nuevafemeride.setMes(cargarMes(scanner));
 		nuevafemeride.setDia(cargarDia(scanner,nuevafemeride));
 		System.out.println("Ingrese detalle de Efemeride: ");
 		nuevafemeride.setDetalle(scanner.next());
-		efemerides.add(nuevafemeride);
+		if (i == -1) {
+			efemerides.add(nuevafemeride);
+		}else {
+			efemerides.set(i, nuevafemeride);
+		}
 	}
 
 	private static Short cargarDia(Scanner scanner, Efemeride nuevafemeride) {
