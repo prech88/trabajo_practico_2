@@ -144,13 +144,10 @@ public class Main {
 	public static void mostrarMenu() {
 		System.out.println( "Menu: " + "\n" +
 							"1 – Alta de jugador." + "\n" +
-							"2 – Mostrar los datos del jugador." + "\n" +
-							"3 – Mostrar todos los jugadores ordenados por apellido." + "\n" +
-							"4 – Modificar los datos de un jugador." + "\n" +
-							"5 – Eliminar un jugador." + "\n" +
-							"6 – Mostrar la cantidad total de jugadores que tiene el ArrayList." + "\n" +
-							"7 – Mostrar la cantidad de jugadores que pertenecen a una nacionalidad." + "\n" +
-							"8 – Salir.");
+							"2 – Mostrar todos los jugadores." + "\n" +
+							"3 – Modificar posicion de un jugador." + "\n" +
+							"4 – Eliminar un jugador." + "\n" +
+							"5 – Salir.");
 	}
 	
 	public static int verificarEntradaDeDatoInt(Scanner scanner, String mensaje) {
