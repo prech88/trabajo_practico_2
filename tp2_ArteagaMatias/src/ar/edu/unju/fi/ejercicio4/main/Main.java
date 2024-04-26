@@ -3,7 +3,6 @@ package ar.edu.unju.fi.ejercicio4.main;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Scanner;
 
