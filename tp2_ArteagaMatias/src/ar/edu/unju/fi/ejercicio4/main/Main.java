@@ -81,8 +81,7 @@ public class Main {
 
 	private static void modificarPosicionJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
 		if (!jugadores.isEmpty()) {
-			System.out
-					.println("Para modificar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
+			System.out.println("Para modificar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
 			String nombre = scanner.next();
 			System.out.println("Ingrese apellido: ");
 			String apellido = scanner.next();
@@ -90,8 +89,8 @@ public class Main {
 			int indice = 0;
 			for (Jugador jugador : jugadores) {
 				if (nombre.equals(jugador.getNombre()) && apellido.equals(jugador.getApellido())) {
-					System.out.println("Jugador encontrado. Ingrese los nuevos datos:");
-					jugadores.set(indice, cargarJugador(scanner));
+					System.out.println("Jugador encontrado. Ingrese nueva posicion de jugador:");
+					jugadores.get(indice).setPosicion(cargarPocicion(scanner));
 					System.out.println("Jugador modificado exitosamente.");
 					noEncontrado = false;
 					break;
