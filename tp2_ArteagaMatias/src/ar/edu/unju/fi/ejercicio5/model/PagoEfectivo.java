@@ -21,13 +21,14 @@ public class PagoEfectivo implements Pago{
 	@Override
 	public void realizarPago(double monto) {
 		// TODO Auto-generated method stub
-		
+		this.montoPagado = monto - (monto * 0.10);
 	}
 
 	@Override
 	public void imprimirRecibo() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Fecha de pago: " + fechaDePago +"\n" +
+							"Monto pagado: " + montoPagado);
 	}
 
 	public LocalDate getFechaDePago() {
