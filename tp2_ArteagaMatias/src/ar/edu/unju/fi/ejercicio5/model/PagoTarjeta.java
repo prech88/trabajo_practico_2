@@ -29,9 +29,11 @@ public class PagoTarjeta implements Pago{
 	@Override
 	public void imprimirRecibo() {
 		// TODO Auto-generated method stub
-		System.out.println("Número de tarjeta: " + numeroDeTarjeta + "\n" +
+		System.out.println("------------------------------------------------" + "\n" +
+							"Número de tarjeta: " + numeroDeTarjeta + "\n" +
 							"Fecha de pago: " + fechaDePago +"\n" +
-							"Monto pagado: " + montoPagado);
+							"Monto pagado: " + montoPagado + "\n" +
+							"------------------------------------------------");
 	}
 
 	public String getNumeroDeTarjeta() {

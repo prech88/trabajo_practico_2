@@ -27,8 +27,10 @@ public class PagoEfectivo implements Pago{
 	@Override
 	public void imprimirRecibo() {
 		// TODO Auto-generated method stub
-		System.out.println("Fecha de pago: " + fechaDePago +"\n" +
-							"Monto pagado: " + montoPagado);
+		System.out.println("------------------------------------------------" + "\n" +
+							"Fecha de pago: " + fechaDePago +"\n" +
+							"Monto pagado: " + montoPagado + "\n" +
+							"------------------------------------------------");
 	}
 
 	public LocalDate getFechaDePago() {
