@@ -6,6 +6,7 @@ public class Producto {
 	private Double precioUnitario;
 	private Paises origenFabricacion;
 	private Categorias categoria;
+	private Boolean inStock;
 	
 	public Producto() {
 		// TODO Auto-generated constructor stub
@@ -19,6 +20,16 @@ public class Producto {
 		this.categoria = categoria;
 	}
 	
+	public Producto(Integer codigo, String descripcion, Double precioUnitario, Paises origenFabricacion,
+			Categorias categoria, Boolean inStock) {
+		this.codigo = codigo;
+		this.descripcion = descripcion;
+		this.precioUnitario = precioUnitario;
+		this.origenFabricacion = origenFabricacion;
+		this.categoria = categoria;
+		this.inStock = inStock;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto [codigo=" + codigo + ", descripcion=" + descripcion + ", precioUnitario=" + precioUnitario
@@ -63,6 +74,14 @@ public class Producto {
 
 	public void setCategoria(Categorias categoria) {
 		this.categoria = categoria;
+	}
+
+	public Boolean getInStock() {
+		return inStock;
+	}
+
+	public void setInStock(Boolean inStock) {
+		this.inStock = inStock;
 	}
 
 	public enum Paises {
