@@ -15,6 +15,11 @@ public class FelinoDomestico {
 		this.peso = peso;
 	}
 
+	@Override
+	public String toString() {
+		return "FelinoDomestico [nombre=" + nombre + ", edad=" + edad + ", peso=" + peso + "]";
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
