@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import ar.edu.unju.fi.ejercicio1.model.Producto;
+import ar.edu.unju.fi.ejercicio5.interfaces.Pago;
 import ar.edu.unju.fi.ejercicio5.model.PagoEfectivo;
 import ar.edu.unju.fi.ejercicio5.model.PagoTarjeta;
 
@@ -73,32 +74,26 @@ public class Main {
 	private static void pagar(ArrayList<Producto> carrito, Scanner scanner) {
 		boolean salir = false;
 		Double total = 0.0;
+		for (Producto producto : carrito) {
+			total = total + producto.getPrecioUnitario();
+		}
 		do {
 			mostrarMenuPagar();
 			int opcion = verificarEntradaDeDatoInt( scanner, "Ingrese numero de opcion: ");
 			switch (opcion) {
 			case 1:
-				PagoEfectivo nuevoPago = new PagoEfectivo();
-				for (Producto producto : carrito) {
-					total = total + producto.getPrecioUnitario();
-				}
-				nuevoPago.setFechaDePago(LocalDate.now());
-				nuevoPago.realizarPago(total);
-				nuevoPago.imprimirRecibo();
+				Pago nuevoEfectivo = new PagoEfectivo(LocalDate.now(), total);
+				nuevoEfectivo.realizarPago(total);
+				nuevoEfectivo.imprimirRecibo();
 				carrito.clear();
 				salir = true;
 				System.out.println("Se pago exitosamente");
 				break;
 			case 2:
-				PagoTarjeta nuevoPagoTarjeta = new PagoTarjeta();
-				for (Producto producto : carrito) {
-					total = total + producto.getPrecioUnitario();
-				}
 				System.out.println("Ingrese numero de tarjeta: ");
-				nuevoPagoTarjeta.setNumeroDeTarjeta(scanner.next());
-				nuevoPagoTarjeta.setFechaDePago(LocalDate.now());
-				nuevoPagoTarjeta.realizarPago(total);
-				nuevoPagoTarjeta.imprimirRecibo();
+				Pago nuevoTarjeta = new PagoTarjeta(scanner.next(), LocalDate.now(), total);
+				nuevoTarjeta.realizarPago(total);
+				nuevoTarjeta.imprimirRecibo();
 				carrito.clear();
 				salir = true;
 				System.out.println("----- Se pago exitosamente -----");
