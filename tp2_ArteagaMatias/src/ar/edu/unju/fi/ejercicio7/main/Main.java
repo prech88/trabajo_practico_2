@@ -40,6 +40,7 @@ public class Main {
 				ordenarPrecioDescendente(productos);
 				break;
 			case 6:
+				mostrarProductosEnMayusculas(productos);
 				break;
 			case 7:
 				salir = true;
@@ -56,6 +57,12 @@ public class Main {
 		scanner.close();
 	}
 	
+	private static void mostrarProductosEnMayusculas(ArrayList<Producto> productos) {
+		Function<Producto,Producto> functionPasarAMayusculas = x -> {x.setDescripcion(x.getDescripcion().toUpperCase());return x;};
+		List<Producto> productosEnMayusculas = productos.stream().map(functionPasarAMayusculas).collect(Collectors.toList());
+		mostrarProductos(new ArrayList<>(productosEnMayusculas));
+	}
+
 	private static void ordenarPrecioDescendente(ArrayList<Producto> productos) {
 		productos.sort(Comparator.comparing(Producto::getPrecioUnitario).reversed());
 		mostrarProductos(productos);
