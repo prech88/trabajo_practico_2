@@ -40,7 +40,8 @@ public class Main {
 				ordenarPrecioDescendente(productos);
 				break;
 			case 6:
-				mostrarProductosEnMayusculas(productos);
+				ArrayList<Producto> productosCopia = new ArrayList<>(productos);
+				mostrarProductosEnMayusculas(productosCopia);
 				break;
 			case 7:
 				salir = true;
@@ -57,30 +58,32 @@ public class Main {
 		scanner.close();
 	}
 	
-	private static void mostrarProductosEnMayusculas(ArrayList<Producto> productos) {
+	public static void mostrarProductosEnMayusculas(ArrayList<Producto> productos) {
 		Function<Producto,Producto> functionPasarAMayusculas = x -> {x.setDescripcion(x.getDescripcion().toUpperCase());return x;};
 		List<Producto> productosEnMayusculas = productos.stream().map(functionPasarAMayusculas).collect(Collectors.toList());
 		mostrarProductos(new ArrayList<>(productosEnMayusculas));
 	}
 
-	private static void ordenarPrecioDescendente(ArrayList<Producto> productos) {
-		productos.sort(Comparator.comparing(Producto::getPrecioUnitario).reversed());
-		mostrarProductos(productos);
+	public static void ordenarPrecioDescendente(ArrayList<Producto> productos) {
+		ArrayList<Producto> productosCopia = new ArrayList<>(productos);
+		productosCopia.sort(Comparator.comparing(Producto::getPrecioUnitario).reversed());
+		mostrarProductos(productosCopia);
 	}
 
-	private static void mostrarProductosElectrohogarEnStock(ArrayList<Producto> productos) {
+	public static void mostrarProductosElectrohogarEnStock(ArrayList<Producto> productos) {
 		Predicate<Producto> filterProduct = x -> x.getInStock() && x.getCategoria().equals(Producto.Categorias.ELECTROHOGAR);
 		List<Producto> productosElectrohogarStock = productos.stream().filter(filterProduct).collect(Collectors.toList());
 		mostrarProductos(new ArrayList<>(productosElectrohogarStock));
 	}
 
-	private static void incrementarPrecios(ArrayList<Producto> productos) {
+	public static void incrementarPrecios(ArrayList<Producto> productos) {
+		ArrayList<Producto> productosCopia = new ArrayList<>(productos);
 		Function<Producto,Producto> functionIncrementarPrecio = x -> {x.setPrecioUnitario(x.getPrecioUnitario()*1.2);return x;};
-		List<Producto> productosNuevoPrecio = productos.stream().map(functionIncrementarPrecio).collect(Collectors.toList());
+		List<Producto> productosNuevoPrecio = productosCopia.stream().map(functionIncrementarPrecio).collect(Collectors.toList());
 		mostrarProductos(new ArrayList<>(productosNuevoPrecio));
 	}
 
-	private static void mostrarProductosFaltantes(ArrayList<Producto> productos) {
+	public static void mostrarProductosFaltantes(ArrayList<Producto> productos) {
 		Predicate<Producto> filterProduct = x -> !x.getInStock();
 		List<Producto> productosSinStock = productos.stream().filter(filterProduct).collect(Collectors.toList());
 		mostrarProductos(new ArrayList<>(productosSinStock));
@@ -122,7 +125,7 @@ public class Main {
 							"7 – Salir.");
 	}
 	
-	private static void cargarProductos(ArrayList<Producto> productos) {
+	public static void cargarProductos(ArrayList<Producto> productos) {
 		productos.add(new Producto(101, "Mouse inalambrico", 23000.00, Producto.Paises.ARGENTINA, Producto.Categorias.INFORMATICA, true));
 		productos.add(new Producto(102, "Mouse pad", 12000.00, Producto.Paises.ARGENTINA, Producto.Categorias.INFORMATICA, true));
 		productos.add(new Producto(103, "Mouse gamer", 45000.00, Producto.Paises.ARGENTINA, Producto.Categorias.INFORMATICA, false));
