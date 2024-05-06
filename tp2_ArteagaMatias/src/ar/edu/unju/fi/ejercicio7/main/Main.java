@@ -33,6 +33,7 @@ public class Main {
 				incrementarPrecios(productos);
 				break;
 			case 4:
+				mostrarProductosElectrohogarEnStock(productos);
 				break;
 			case 5:
 				break;
@@ -53,6 +54,12 @@ public class Main {
 		scanner.close();
 	}
 	
+	private static void mostrarProductosElectrohogarEnStock(ArrayList<Producto> productos) {
+		Predicate<Producto> filterProduct = x -> x.getInStock() && x.getCategoria().equals(Producto.Categorias.ELECTROHOGAR);
+		List<Producto> productosElectrohogarStock = productos.stream().filter(filterProduct).collect(Collectors.toList());
+		mostrarProductos(new ArrayList<>(productosElectrohogarStock));
+	}
+
 	private static void incrementarPrecios(ArrayList<Producto> productos) {
 		Function<Producto,Producto> functionIncrementarPrecio = x -> {x.setPrecioUnitario(x.getPrecioUnitario()*1.2);return x;};
 		List<Producto> productosNuevoPrecio = productos.stream().map(functionIncrementarPrecio).collect(Collectors.toList());
