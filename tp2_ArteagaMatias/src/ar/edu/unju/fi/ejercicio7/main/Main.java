@@ -2,6 +2,7 @@ package ar.edu.unju.fi.ejercicio7.main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 import ar.edu.unju.fi.ejercicio1.model.Producto;
 
@@ -19,6 +20,7 @@ public class Main {
 			opcion = verificarEntradaDeDatoInt( scanner, "Ingrese numero de opcion: ");
 			switch (opcion) {
 			case 1:
+				mostrarProductos(productos);
 				break;
 			case 2:
 				break;
@@ -45,6 +47,11 @@ public class Main {
 		scanner.close();
 	}
 	
+	public static void mostrarProductos(ArrayList<Producto> productos) {
+		Consumer<Producto> printConsumerProd = x -> System.out.println(x);
+		productos.forEach(printConsumerProd);
+	}
+
 	public static int verificarEntradaDeDatoInt(Scanner scanner, String mensaje) {
 		int entradaEntero = 0;
 		boolean entradaValida = false;
@@ -77,7 +84,7 @@ public class Main {
 	}
 	
 	private static void cargarProductos(ArrayList<Producto> productos) {
-		productos.add(new Producto(100, "Mouse inalambrico", 23000.00, Producto.Paises.ARGENTINA, Producto.Categorias.INFORMATICA, true));
+		productos.add(new Producto(101, "Mouse inalambrico", 23000.00, Producto.Paises.ARGENTINA, Producto.Categorias.INFORMATICA, true));
 		productos.add(new Producto(102, "Mouse pad", 12000.00, Producto.Paises.ARGENTINA, Producto.Categorias.INFORMATICA, true));
 		productos.add(new Producto(103, "Mouse gamer", 45000.00, Producto.Paises.ARGENTINA, Producto.Categorias.INFORMATICA, false));
 		productos.add(new Producto(104, "Microondas", 156000.00, Producto.Paises.ARGENTINA, Producto.Categorias.ELECTROHOGAR, true));
