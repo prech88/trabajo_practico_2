@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.ejercicio7.main;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
@@ -36,6 +37,7 @@ public class Main {
 				mostrarProductosElectrohogarEnStock(productos);
 				break;
 			case 5:
+				ordenarPrecioDescendente(productos);
 				break;
 			case 6:
 				break;
@@ -54,6 +56,11 @@ public class Main {
 		scanner.close();
 	}
 	
+	private static void ordenarPrecioDescendente(ArrayList<Producto> productos) {
+		productos.sort(Comparator.comparing(Producto::getPrecioUnitario).reversed());
+		mostrarProductos(productos);
+	}
+
 	private static void mostrarProductosElectrohogarEnStock(ArrayList<Producto> productos) {
 		Predicate<Producto> filterProduct = x -> x.getInStock() && x.getCategoria().equals(Producto.Categorias.ELECTROHOGAR);
 		List<Producto> productosElectrohogarStock = productos.stream().filter(filterProduct).collect(Collectors.toList());
