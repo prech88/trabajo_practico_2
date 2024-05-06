@@ -1,8 +1,11 @@
 package ar.edu.unju.fi.ejercicio7.main;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import ar.edu.unju.fi.ejercicio1.model.Producto;
 
@@ -23,6 +26,7 @@ public class Main {
 				mostrarProductos(productos);
 				break;
 			case 2:
+				mostrarProductosFaltantes(productos);
 				break;
 			case 3:
 				break;
@@ -47,6 +51,12 @@ public class Main {
 		scanner.close();
 	}
 	
+	private static void mostrarProductosFaltantes(ArrayList<Producto> productos) {
+		Predicate<Producto> filterProduct = x -> x.getInStock() == false;
+		List<Producto> productosSinStock = productos.stream().filter(filterProduct).collect(Collectors.toList());
+		mostrarProductos(new ArrayList<>(productosSinStock));
+	}
+
 	public static void mostrarProductos(ArrayList<Producto> productos) {
 		Consumer<Producto> printConsumerProd = x -> System.out.println(x);
 		productos.forEach(printConsumerProd);
