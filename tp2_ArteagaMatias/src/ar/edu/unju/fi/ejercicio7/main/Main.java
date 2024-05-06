@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,7 @@ public class Main {
 				mostrarProductosFaltantes(productos);
 				break;
 			case 3:
+				incrementarPrecios(productos);
 				break;
 			case 4:
 				break;
@@ -51,8 +53,14 @@ public class Main {
 		scanner.close();
 	}
 	
+	private static void incrementarPrecios(ArrayList<Producto> productos) {
+		Function<Producto,Producto> functionIncrementarPrecio = x -> {x.setPrecioUnitario(x.getPrecioUnitario()*1.2);return x;};
+		List<Producto> productosNuevoPrecio = productos.stream().map(functionIncrementarPrecio).collect(Collectors.toList());
+		mostrarProductos(new ArrayList<>(productosNuevoPrecio));
+	}
+
 	private static void mostrarProductosFaltantes(ArrayList<Producto> productos) {
-		Predicate<Producto> filterProduct = x -> x.getInStock() == false;
+		Predicate<Producto> filterProduct = x -> !x.getInStock();
 		List<Producto> productosSinStock = productos.stream().filter(filterProduct).collect(Collectors.toList());
 		mostrarProductos(new ArrayList<>(productosSinStock));
 	}
