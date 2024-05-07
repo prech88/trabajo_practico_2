@@ -40,8 +40,7 @@ public class Main {
 				ordenarPrecioDescendente(productos);
 				break;
 			case 6:
-				ArrayList<Producto> productosCopia = new ArrayList<>(productos);
-				mostrarProductosEnMayusculas(productosCopia);
+				mostrarProductosEnMayusculas(productos);
 				break;
 			case 7:
 				salir = true;
@@ -65,9 +64,8 @@ public class Main {
 	}
 
 	public static void ordenarPrecioDescendente(ArrayList<Producto> productos) {
-		ArrayList<Producto> productosCopia = new ArrayList<>(productos);
-		productosCopia.sort(Comparator.comparing(Producto::getPrecioUnitario).reversed());
-		mostrarProductos(productosCopia);
+		productos.sort(Comparator.comparing(Producto::getPrecioUnitario).reversed());
+		mostrarProductos(productos);
 	}
 
 	public static void mostrarProductosElectrohogarEnStock(ArrayList<Producto> productos) {
