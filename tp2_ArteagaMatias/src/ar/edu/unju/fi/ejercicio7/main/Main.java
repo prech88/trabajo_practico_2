@@ -75,9 +75,8 @@ public class Main {
 	}
 
 	public static void incrementarPrecios(ArrayList<Producto> productos) {
-		ArrayList<Producto> productosCopia = new ArrayList<>(productos);
 		Function<Producto,Producto> functionIncrementarPrecio = x -> {x.setPrecioUnitario(x.getPrecioUnitario()*1.2);return x;};
-		List<Producto> productosNuevoPrecio = productosCopia.stream().map(functionIncrementarPrecio).collect(Collectors.toList());
+		List<Producto> productosNuevoPrecio = productos.stream().map(functionIncrementarPrecio).collect(Collectors.toList());
 		mostrarProductos(new ArrayList<>(productosNuevoPrecio));
 	}
 
