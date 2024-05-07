@@ -19,6 +19,8 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<Producto> productos = new ArrayList<>();
 		cargarProductos(productos);
+		ArrayList<Producto> productosCopia = new ArrayList<>();
+		cargarProductos(productosCopia);
 		
 		do {
 			mostrarMenu();
@@ -31,16 +33,16 @@ public class Main {
 				mostrarProductosFaltantes(productos);
 				break;
 			case 3:
-				incrementarPrecios(productos);
+				incrementarPrecios(productosCopia);
 				break;
 			case 4:
 				mostrarProductosElectrohogarEnStock(productos);
 				break;
 			case 5:
-				ordenarPrecioDescendente(productos);
+				ordenarPrecioDescendente(productosCopia);
 				break;
 			case 6:
-				mostrarProductosEnMayusculas(productos);
+				mostrarProductosEnMayusculas(productosCopia);
 				break;
 			case 7:
 				salir = true;
